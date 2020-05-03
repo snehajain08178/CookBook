@@ -4,43 +4,17 @@ import { grey, lightgrey, gainsboro, white, lightblue } from './../../Colors/Col
 
 class FoodTypes extends Component {
 
-    state={
-        types: [
-            'main course',
-            'side dish',
-            'dessert',
-            'appetizer',
-            'salad',
-            'bread',
-            'breakfast',
-            'soup',
-            'beverage',
-            'sauce',
-            'marinade',
-            'fingerfood',
-            'snack',
-            'drink'
-        ],
-        pressedIndex : ''
-    }
-
-    changeStyleOnPress = (index) => {
-        this.setState({
-            pressedIndex: index
-        })
-    }
-
     render(){
         return(
             <View>
                 <FlatList
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    data={this.state.types}
+                    data={this.props.data.types}
                     keyExtractor={(index) => index.toString()}
                     renderItem={({item,index}) => (
-                        <View style={ index === this.state.pressedIndex ? styles.flatListViewContainerPressed : styles.flatListViewContainer } >
-                            <TouchableOpacity style={index === this.state.pressedIndex ? styles.flatListContainerPressed : styles.flatListContainer} onPress={() => this.changeStyleOnPress(index)}>
+                        <View style={ index === this.props.data.pressedIndex ? styles.flatListViewContainerPressed : styles.flatListViewContainer } >
+                            <TouchableOpacity style={index === this.props.data.pressedIndex ? styles.flatListContainerPressed : styles.flatListContainer} onPress={() => this.props.highlightItem(index)}>
                                 <Text style={styles.typesText}>{item}</Text>
                             </TouchableOpacity>
                         </View>
@@ -83,5 +57,5 @@ const styles = StyleSheet.create({
     }
 })
 
+export default FoodTypes;
 
-export default FoodTypes
