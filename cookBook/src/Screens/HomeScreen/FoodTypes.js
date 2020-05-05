@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     flatListContainerPressed: {
         backgroundColor: lightblue,
         borderRadius: 10,
-        height: 150,
-        width: 150,
+        height: 130,
+        width: 130,
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 10,
@@ -45,15 +45,16 @@ const styles = StyleSheet.create({
     flatListContainer: {
         backgroundColor: gainsboro,
         borderRadius: 10,
-        height: 120,
-        width: 120,
+        height: 100,
+        width: 100,
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 10,
     },
     typesText: {
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
+        textTransform: 'capitalize'
     }
 })
 

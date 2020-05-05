@@ -1,12 +1,14 @@
 import React, { Component} from 'react';
 import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import { grey, lightgrey, gainsboro, white, lightblue } from './../../Colors/Colors';
+import { grey, lightgrey, gainsboro, white, lightblue, black } from './../../Colors/Colors';
 import FoodTypes from './FoodTypes';
 import { strings } from './../../Strings/Strings';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { foodData } from './HomeScreenAction';
 import { bindActionCreators } from 'redux';
+import FoodTypeItems from './FoodTypeItems';
+import IconAnt from 'react-native-vector-icons/AntDesign';
 
 class HomeScreen extends Component {
 
@@ -39,7 +41,7 @@ class HomeScreen extends Component {
         this.setState({
             pressedIndex: index
         })
-        axios.get('https://api.spoonacular.com/recipes/search?&apiKey=419c7447ca9346d2940ca0b1907a67c3&type=main course')
+        axios.get(`https://api.spoonacular.com/recipes/search?&apiKey=419c7447ca9346d2940ca0b1907a67c3&type=${this.state.types[index]}`)
             .then((response) => {
                 //console.log(JSON.stringify(response.data.results,null,6));
                 this.props.onFoodData(response.data.results)
@@ -53,7 +55,13 @@ class HomeScreen extends Component {
     render(){
         return(
             <View style={styles.mainContainer}>
+                <View>
+                <View style={styles.searchIcon}>
+                    <IconAnt name='search1' size={25} color={black} />
+                </View>
                 <Text style={styles.welcomeText}>{this.state.pressedIndex === -1 ? strings.WELCOME : this.state.types[this.state.pressedIndex]}</Text>
+                </View>
+                <FoodTypeItems data={this.props.dataFoodType.foodTypeData} />
                 <FoodTypes data={this.state} highlightItem={this.changeStyleOnPress} />
             </View>
         )
@@ -67,9 +75,15 @@ const styles = StyleSheet.create({
         padding: 20,
         justifyContent: 'space-between'
     },
+    searchIcon: {
+        alignSelf: 'flex-end',
+        marginRight: 20,
+        marginTop: 4
+    },
     welcomeText: {
         fontSize: 30,
-        marginTop: 20
+        marginTop: 0,
+        textTransform: 'capitalize'
     }
 })
 
