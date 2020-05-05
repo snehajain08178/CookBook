@@ -20,6 +20,7 @@ class FoodTypeItems extends Component {
                 <FlatList 
                     data={this.props.data}
                     horizontal={true}
+                    keyExtractor={(index) => index.toString()}
                     showsHorizontalScrollIndicator={false}
                     renderItem={({item,index}) => (
                         <View style={styles.flatlistViewContainer}>

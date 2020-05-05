@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { Text, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { grey, lightgrey, gainsboro, white, lightblue, black } from './../../Colors/Colors';
 import FoodTypes from './FoodTypes';
 import { strings } from './../../Strings/Strings';
@@ -61,7 +61,7 @@ class HomeScreen extends Component {
                 </View>
                 <Text style={styles.welcomeText}>{this.state.pressedIndex === -1 ? strings.WELCOME : this.state.types[this.state.pressedIndex]}</Text>
                 </View>
-                <FoodTypeItems data={this.props.dataFoodType.foodTypeData} />
+                {this.state.pressedIndex ==-1 ?  <Image style={styles.image} source={{uri : 'https://d1cbe14be5894c8dcc3d-8a742a0d46bf003746b2a98abb2fa3cf.ssl.cf2.rackcdn.com/wp-content/uploads/2015/07/why-am-i-always-hungry-1.jpg'}} /> : <FoodTypeItems data={this.props.dataFoodType.foodTypeData} /> }
                 <FoodTypes data={this.state} highlightItem={this.changeStyleOnPress} />
             </View>
         )
@@ -83,7 +83,12 @@ const styles = StyleSheet.create({
     welcomeText: {
         fontSize: 30,
         marginTop: 0,
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        fontWeight: 'bold'
+    },
+    image: {
+        width: '100%',
+        height: 350
     }
 })
 
